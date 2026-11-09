@@ -23,6 +23,9 @@ export LC_NUMERIC="en_US.UTF-8"
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ScriptPath=$(dirname "${BASH_SOURCE[0]}")
 
+# Run at lowest CPU priority (inherited by all child processes)
+renice -n 19 -p $$ > /dev/null 2>&1
+
 # Agent Version (do not change)
 Version="2.0.10"
 
