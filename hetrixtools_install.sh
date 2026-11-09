@@ -73,12 +73,12 @@ echo "... done."
 
 # Fetching the agent
 echo "Fetching the agent..."
-wget -t 1 -T 30 -qO /etc/hetrixtools/hetrixtools_agent.sh https://raw.githubusercontent.com/hetrixtools/agent/$BRANCH/hetrixtools_agent.sh
+wget -t 1 -T 30 -qO /etc/hetrixtools/hetrixtools_agent.sh https://raw.githubusercontent.com/tianyichen/hetrixtools-agent/$BRANCH/hetrixtools_agent.sh
 echo "... done."
 
 # Fetching the config file
 echo "Fetching the config file..."
-wget -t 1 -T 30 -qO /etc/hetrixtools/hetrixtools.cfg https://raw.githubusercontent.com/hetrixtools/agent/$BRANCH/hetrixtools.cfg
+wget -t 1 -T 30 -qO /etc/hetrixtools/hetrixtools.cfg https://raw.githubusercontent.com/tianyichen/hetrixtools-agent/$BRANCH/hetrixtools.cfg
 echo "... done."
 
 # Inserting Server ID (SID) into the agent config
@@ -172,7 +172,7 @@ then
 	crontab -u root -l 2>/dev/null | { cat; echo "* * * * * bash /etc/hetrixtools/hetrixtools_agent.sh >> /etc/hetrixtools/hetrixtools_cron.log 2>&1"; } | crontab -u root - >/dev/null 2>&1
 else
 	echo "Setting up the new cronjob as 'hetrixtools' user..."
-	crontab -u hetrixtools -l 2>/dev/null | { cat; echo "* * * * * bash /etc/hetrixtools/hetrixtools_agent.sh >> /etc/hetrixtools/hetrixtools_cron.log 2>&1"; } | crontab -u hetrixtools - >/dev/null 2>&1
+	crontab -u hetrixtools -l 2>/dev/null | { cat; echo "*/5 * * * * bash /etc/hetrixtools/hetrixtools_agent.sh >> /etc/hetrixtools/hetrixtools_cron.log 2>&1"; } | crontab -u hetrixtools - >/dev/null 2>&1
 fi
 echo "... done."
 
